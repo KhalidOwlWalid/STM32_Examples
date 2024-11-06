@@ -18,8 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <stdio.h>
 
 UART_HandleTypeDef huart1;
+static GPIO_InitTypeDef gpioInitStruct;
 
 /**
   * @brief  The application entry point.
@@ -41,8 +43,10 @@ int main(void)
 
   /* Infinite loop */
   while (1) {
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
-    HAL_Delay(1000);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
+    HAL_Delay(50);
   }
 }
 
@@ -120,8 +124,21 @@ void MX_USART1_UART_Init(void)
 void MX_GPIO_Init(void)
 {
   /* GPIO Ports Clock Enable */
+
+  /* NOTE: Whenever you are configuring any pins that uses a certain GPIO port.
+   * Please be sure to enable its clock. If not, it will not do anything. In this example,
+   * I have tried to connect an LED to PB7 and make it blink in the main loop. If you were
+   * to comment out __HAL_RCC_GPIOB_CLK_ENABLE() function, it would not blink at all!*/
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  gpioInitStruct.Pin = GPIO_PIN_7;
+  gpioInitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  gpioInitStruct.Pull = GPIO_NOPULL;
+  gpioInitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &gpioInitStruct);
+
 }
 
 /**

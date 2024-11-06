@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "stm32-intellisense-config",
+            "includePath": [
+                "${workspaceFolder}/interrupts_example/Core/Inc",
+                "/home/khalidowlwalid/stm32_workspace/interrupts_example/Drivers/CMSIS/Device/ST/STM32F0xx/Include",
+                "/home/khalidowlwalid/stm32_workspace/interrupts_example/Drivers/STM32F0xx_HAL_Driver/Inc",
+                "/home/khalidowlwalid/stm32_workspace/interrupts_example/Drivers/CMSIS/Include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/lib/ccache/arm-none-eabi-gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
